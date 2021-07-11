@@ -1,4 +1,5 @@
 name: test
+pool: Default
 steps:
 - bash: echo hello world
     
