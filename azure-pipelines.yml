@@ -1,5 +1,5 @@
 name: test
 pool: Default
 steps:
-- bash: echo hello world
+- script: echo hello world
     
