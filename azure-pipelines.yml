@@ -30,4 +30,6 @@ steps:
     cd %CATALINA_HOME%\bin
     tomcat9 //DS//tomcat9
     service.bat install tomcat9
+- script: 
+    cd %CATALINA_HOME%\bin
     tomcat9 //US//tomcat9 --JvmOptions -Dcatalina.home=%CATALINA_HOME%;-Dcatalina.base=%CATALINA_HOME%;-Dignore.endorsed.dirs=%CATALINA_HOME%\endorsed;-Djava.io.tmpdir=%CATALINA_HOME%\temp;-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager;-Djava.util.logging.config.file=%CATALINA_HOME%\conf\logging.properties;-XX:ParallelGCThreads=2;-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT --JvmMs=1024 --JvmMx=4096 --Startup=auto
