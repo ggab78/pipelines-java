@@ -1,8 +1,6 @@
 name: test
 pool: Default
 steps:
-- script: mkdir c:\test2
-    
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -11,5 +9,5 @@ steps:
       $filename = Get-ChildItem -Path C:\IIQSoftware\Java\*.zip | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1
       Expand-Archive -Path $filename -DestinationPath $install_folder -Force
       $java_folder = Get-ChildItem -Path $install_folder -Directory | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1
-      $java_home=$install_folder +"\"+ $java_folder +"\test"
+      $java_home=$install_folder +"\"+ $java_folder
       Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name JAVA_HOME -Value $java_home
