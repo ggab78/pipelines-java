@@ -29,9 +29,6 @@ steps:
 - script: |
     echo executing cmd script
     echo %CATALINA_HOME%
-    cd "C:\Program Files\Apache Software Foundation\Tomcat 9.0\bin"
+    cd %CATALINA_HOME%\bin
     tomcat9 //DS//tomcat9
     service.bat install tomcat9
-    echo instling tomcat9
-    echo %CATALINA_BASE%
-    
