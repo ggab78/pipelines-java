@@ -27,13 +27,15 @@ steps:
       Move-Item -Path $install_folder\$oldTomcatFolderName\webapps\identityiq -Destination $install_folder\$newTomcatFolderName\webapps
       Remove-Item -Path $install_folder\$oldTomcatFolderName -Recurse
 - script: |
+    echo executing cmd script
     cd "C:\Program Files\Apache Software Foundation\Tomcat 9.0\bin"
     tomcat9 //DS//tomcat9
     service.bat install tomcat9
+    echo instling tomcat9
     set CATALINA_BASE="C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.50"
     set CATALINA_HOME="C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.50"
     set ENDORSED_PROP=ignore.endorsed.dirs
     set JvmMs=128
     set JvmMx=1024
-    echo setting JAVA_OPTS
+    echo setting %JvmMx%
     tomcat9 //US//tomcat9 --JvmOptions -Dcatalina.home=%CATALINA_HOME%;-Dcatalina.base=%CATALINA_BASE%;-D%ENDORSED_PROP%=%CATALINA_HOME%\endorsed;-Djava.io.tmpdir=%CATALINA_BASE%\temp;-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager;-Djava.util.logging.config.file=%CATALINA_BASE%\conf\logging.properties;-XX:ParallelGCThreads=2;-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT --JvmMs=%JvmMS% --JvmMx=%JvmMX% --Startup=auto
