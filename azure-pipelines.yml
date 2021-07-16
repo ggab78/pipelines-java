@@ -35,6 +35,7 @@ steps:
     set ENDORSED_PROP=ignore.endorsed.dirs
     set JvmMs=128
     set JvmMx=1024
+    echo setting JAVA_OPTS
     tomcat9 //US//tomcat9 --JvmOptions -Dcatalina.home=%CATALINA_HOME%;-Dcatalina.base=%CATALINA_BASE%;-D%ENDORSED_PROP%=%CATALINA_HOME%\endorsed;-Djava.io.tmpdir=%CATALINA_BASE%\temp;-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager;-Djava.util.logging.config.file=%CATALINA_BASE%\conf\logging.properties;-XX:ParallelGCThreads=2;-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT --JvmMs=%JvmMS% --JvmMx=%JvmMX% --Startup=auto
 
 
