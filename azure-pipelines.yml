@@ -1,5 +1,6 @@
 name: test
 pool: Default
+trigger: none
 steps:
 - task: PowerShell@2
   inputs:
@@ -25,8 +26,8 @@ steps:
       Rename-Item -Path $install_folder\$unzippedTomcatName -NewName $newTomcatFolderName
       Move-Item -Path $install_folder\$oldTomcatFolderName\webapps\identityiq -Destination $install_folder\$newTomcatFolderName\webapps
       Remove-Item -Path $install_folder\$oldTomcatFolderName -Recurse
-      cd $install_folder\$newTomcatFolderName\bin
 - script: |
+    cd "C:\Program Files\Apache Software Foundation\Tomcat 9.0\bin"
     tomcat9 //DS//tomcat9
     service.bat install tomcat9
     set CATALINA_BASE="C:\Program Files\Apache Software Foundation\apache-tomcat-9.0.50"
