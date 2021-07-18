@@ -47,17 +47,10 @@ steps:
       if (Test-Path -Path $install_folder\$oldTomcatFolderName) {
         Remove-Item -Path $install_folder\$oldTomcatFolderName -Recurse
       }
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      cmd.exe /C cd %CATALINA_HOME%\bin
-      $service = Get-Service -Name tomcat9 -ErrorAction SilentlyContinue
-      if ($service -ne $null){
-        Start-Process "cmd.exe" "/C tomcat9.exe //DS//tomcat9"
-      }
-      Start-Process "cmd.exe" "/C service.bat install tomcat9"
-
+- script: |
+    cd %CATALINA_HOME%\bin
+    tomcat9 //DS//tomcat9
+    service.bat install tomcat9
 
 - script: |
     cd %CATALINA_HOME%\bin
