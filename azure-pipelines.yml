@@ -23,7 +23,7 @@ steps:
           $newPath += "$e;"
         }
       }
-      $newPath += %JAVA_HOME%\bin
+      $newPath += "%JAVA_HOME%\bin"
       Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name Path -Value $newPath
       Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name JAVA_HOME -Value $java_home
 - task: PowerShell@2
