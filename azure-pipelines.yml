@@ -51,11 +51,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      cd %CATALINA_HOME%\bin
+      cmd.exe /C cd %CATALINA_HOME%\bin
       $service = Get-Service -Name tomcat9 -ErrorAction SilentlyContinue
       if (($service -ne $null) -and ($service.Status -eq 'Running')){
         cmd.exe /C tomcat9 //DS//tomcat9
-        service.bat install tomcat9
+        cmd.exe /C service.bat install tomcat9
       }
 
 
