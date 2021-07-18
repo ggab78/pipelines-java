@@ -53,10 +53,10 @@ steps:
     script: |
       cmd.exe /C cd %CATALINA_HOME%\bin
       $service = Get-Service -Name tomcat9 -ErrorAction SilentlyContinue
-      if (($service -ne $null) -and ($service.Status -eq 'Running')){
+      if (($service -ne $null){
         cmd.exe /C tomcat9 //DS//tomcat9
-        cmd.exe /C service.bat install tomcat9
       }
+      cmd.exe /C service.bat install tomcat9
 
 
 - script: |
@@ -67,5 +67,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $arrService = Get-Service -Name tomcat9
-      if ($arrService.Status -eq 'Stopped'){Start-Service tomcat9}
+      $service = Get-Service -Name tomcat9
+      if ($service.Status -eq 'Stopped'){Start-Service tomcat9}
