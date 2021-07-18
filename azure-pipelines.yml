@@ -17,6 +17,14 @@ steps:
       Expand-Archive -Path $filename -DestinationPath $install_folder -Force
       $java_folder = Get-ChildItem -Path $install_folder -Directory | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1
       $java_home=$install_folder +"\"+ $java_folder
+      $elements = $Env:Path.Split(";")
+      foreach ($e in $elements){
+        if($e -ne $toRemove){
+          $newPath += "$e;"
+        }
+      }
+      $newPath += %JAVA_HOME%\bin
+      Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name Path -Value $newPath
       Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name JAVA_HOME -Value $java_home
 - task: PowerShell@2
   inputs:
