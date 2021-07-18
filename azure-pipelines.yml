@@ -54,9 +54,9 @@ steps:
       cmd.exe /C cd %CATALINA_HOME%\bin
       $service = Get-Service -Name tomcat9 -ErrorAction SilentlyContinue
       if ($service -ne $null){
-        cmd.exe /C tomcat9 //DS//tomcat9
+        Start-Process "cmd.exe" "/C tomcat9.exe //DS//tomcat9"
       }
-      Start-Process "cmd.exe" "service.bat install tomcat9"
+      Start-Process "cmd.exe" "/C service.bat install tomcat9"
 
 
 - script: |
