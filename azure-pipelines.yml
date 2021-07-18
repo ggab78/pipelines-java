@@ -1,5 +1,5 @@
 name: test
-pool: Default
+pool: DEV
 trigger: none
 steps:
 - script: net tomcat9 stop
