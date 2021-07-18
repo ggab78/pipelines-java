@@ -2,7 +2,12 @@ name: test
 pool: DEV
 trigger: none
 steps:
-- script: net stop tomcat9
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $arrService = Get-Service -Name tomcat9
+      if ($arrService.Status -eq 'Running'){Stop-Service tomcat9}
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -35,4 +40,9 @@ steps:
     cd %CATALINA_HOME%\bin
     tomcat9 //US//tomcat9 --JvmOptions "-Dcatalina.home=%CATALINA_HOME%;-Dcatalina.base=%CATALINA_HOME%;-Dignore.endorsed.dirs=%CATALINA_HOME%\endorsed;-Djava.io.tmpdir=%CATALINA_HOME%\temp;-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager;-Djava.util.logging.config.file=%CATALINA_HOME%\conf\logging.properties;-XX:ParallelGCThreads=2;-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT" --JvmMs=1024 --JvmMx=4096 --Startup=auto
     sc config Tomcat9 obj=LocalSystem
-    net start tomcat9
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $arrService = Get-Service -Name tomcat9
+      if ($arrService.Status -eq 'Stopped'){Start-Service tomcat9}
