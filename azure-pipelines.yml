@@ -56,7 +56,7 @@ steps:
       if ($service -ne $null){
         cmd.exe /C tomcat9 //DS//tomcat9
       }
-      cmd.exe /C service.bat install tomcat9
+      Start-Process "cmd.exe" "service.bat install tomcat9"
 
 
 - script: |
