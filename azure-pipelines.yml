@@ -33,13 +33,20 @@ steps:
       $install_folder = 'C:\Program Files\Apache Software Foundation'
       $oldTomcatFolderName="Tomcat 9.0_old"
       $newTomcatFolderName="Tomcat 9.0"
+      $tomcatPath="C:\Program Files\Apache Software Foundation\Tomcat 9.0"
       $filename = Get-ChildItem -Path C:\IIQSoftware\Apache-Tomcat\*.zip | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1
-      Rename-Item -Path "C:\Program Files\Apache Software Foundation\Tomcat 9.0" -NewName $oldTomcatFolderName
+      if (Test-Path -Path $tomcatPath) {
+        Rename-Item -Path $tomcatPath -NewName $oldTomcatFolderName
+      }
       Expand-Archive -Path $filename -DestinationPath $install_folder -Force
       $unzippedTomcatName = Get-ChildItem -Path $install_folder -Directory | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1
       Rename-Item -Path $install_folder\$unzippedTomcatName -NewName $newTomcatFolderName
-      Move-Item -Path $install_folder\$oldTomcatFolderName\webapps\identityiq -Destination $install_folder\$newTomcatFolderName\webapps
-      Remove-Item -Path $install_folder\$oldTomcatFolderName -Recurse
+      if (Test-Path -Path $install_folder\$oldTomcatFolderName\webapps\identityiq) {
+        Move-Item -Path $install_folder\$oldTomcatFolderName\webapps\identityiq -Destination $install_folder\$newTomcatFolderName\webapps
+      }
+      if (Test-Path -Path $install_folder\$oldTomcatFolderName) {
+        Remove-Item -Path $install_folder\$oldTomcatFolderName -Recurse
+      }
 - script: |
     cd %CATALINA_HOME%\bin
     tomcat9 //DS//tomcat9
