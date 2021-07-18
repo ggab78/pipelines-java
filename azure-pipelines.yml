@@ -6,8 +6,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $arrService = Get-Service -Name tomcat9
-      if ($arrService.Status -eq 'Running'){Stop-Service tomcat9}
+      $service = Get-Service -Name tomcat9 -ErrorAction SilentlyContinue
+      if (($service -ne $null) -and ($service.Status -eq 'Running')){Stop-Service tomcat9}
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
